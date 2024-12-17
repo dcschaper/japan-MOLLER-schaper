@@ -3,10 +3,6 @@ cmake_minimum_required(VERSION 3.5)
 # Name of this project
 project(QwAnalysis VERSION 2.0.0 LANGUAGES CXX)
 
-# Specify the C++ standard
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 # Local path for cmake modules
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules/")
 
@@ -57,22 +53,22 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Sources and headers
 #
 file(GLOB my_project_sources
-         Analysis/src/*.cc
-         Parity/src/*.cc
-         )
+		 Analysis/src/*.cc
+		 Parity/src/*.cc
+		 )
 list(REMOVE_ITEM my_project_sources
   ${PROJECT_SOURCE_DIR}/Analysis/src/QwF1TDContainer.cc
   ${PROJECT_SOURCE_DIR}/Analysis/src/QwSIS3320_Samples.cc
   )
 
 file(GLOB my_project_headers
-         Analysis/include/*.h
-         Parity/include/*.h
-         )
+		 Analysis/include/*.h
+		 Parity/include/*.h
+		 )
 list(REMOVE_ITEM my_project_headers
-         ${PROJECT_SOURCE_DIR}/Analysis/include/QwF1TDContainer.h
-         ${PROJECT_SOURCE_DIR}/Analysis/include/QwSIS3320_Samples.h
-         )
+		 ${PROJECT_SOURCE_DIR}/Analysis/include/QwF1TDContainer.h
+		 ${PROJECT_SOURCE_DIR}/Analysis/include/QwSIS3320_Samples.h
+		 )
 
 #----------------------------------------------------------------------------
 # MYSQLPP
@@ -94,7 +90,7 @@ endif(MYSQLPP_FOUND)
 #----------------------------------------------------------------------------
 # Boost
 #
-find_package(Boost 1.86 REQUIRED COMPONENTS program_options filesystem system regex)
+find_package(Boost COMPONENTS program_options filesystem system regex REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIR})
 
@@ -179,7 +175,7 @@ target_include_directories(${PROJECT_NAME}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Parity/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
-        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
+		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
   )
 
 target_compile_options(${PROJECT_NAME}
@@ -264,3 +260,4 @@ endif()
 # cmake config
 #
 add_subdirectory(cmake)
+
